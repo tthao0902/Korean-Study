@@ -77,7 +77,7 @@ function streak() {
 }
 const badge = (name, warm = false) => `<span class="badge-icon${warm?' warm':''}">${icon(name)}</span>`;
 const title = (head, desc) => `<div class="page-head"><div class="eyebrow">Haru · 하루</div><h1>${head}</h1><p>${desc}</p></div>`;
-const sound = text => `<button class="icon-button" data-sound="${safe(text)}" aria-label="Nghe phát âm ${safe(text)}">${icon('sound')}</button>`;
+const sound = (text, label = 'Nghe phát âm '+text) => `<button class="icon-button" data-sound="${safe(text)}" aria-label="${safe(label)}">${icon('sound')}</button>`;
 const targetLevel = (selected, all = false) => (all ? '<option value="">Mọi cấp độ</option>' : '') +
   stages.slice(1).map((stage, i) => `<option value="${i+1}" ${String(selected) === String(i+1)?'selected':''}>${stage}</option>`).join('');
 const progress = (value,max,label) => `<progress class="progress" value="${value}" max="${max}" aria-label="${label}"></progress>`;
@@ -245,7 +245,7 @@ function quizMarkup(q) {
     <div class="row spaced">${q.parts.map((part,i) => `<button class="btn" data-pick="${i}" lang="ko" ${q.selected.includes(i)||answered?'disabled':''}>${safe(part)}</button>`).join('')}</div>
     <button class="btn primary spaced" data-check ${q.selected.length!==q.parts.length||answered?'disabled':''}>Kiểm tra câu</button>` : '';
   const typed = q.typed ? `<form id="cloze" class="row spaced"><label class="field">Từ còn thiếu<input name="response" lang="ko" required maxlength="80" value="${safe(q.response)}" ${answered?'disabled':''}></label><button class="btn primary" type="submit" ${answered?'disabled':''}>Kiểm tra</button></form>` : '';
-  return `<div class="row"><strong ${q.ko?'lang="ko"':''}>${safe(q.prompt)}</strong>${q.audio ? sound(q.audio) : ''}</div>
+  return `<div class="row"><strong ${q.ko?'lang="ko"':''}>${safe(q.prompt)}</strong>${q.audio ? sound(q.audio,'Nghe từ trong câu hỏi') : ''}</div>
     ${order || typed || `<div class="choices">${q.options.map((option,i) => `<button data-answer="${i}" class="btn ${answered&&option===q.answer?'selected':''}" ${q.optionsKo?'lang="ko"':''} ${answered?'disabled':''}>${safe(option)}</button>`).join('')}</div>`}
     ${answered ? `<p role="status" class="feedback ${q.correct?'':'wrong'}">${q.correct?'Chính xác!':'Chưa đúng.'} ${q.typed && !q.correct ? 'Đáp án: '+safe(q.answer)+'. ' : ''}${safe(q.explanation)}</p>` : ''}`;
 }

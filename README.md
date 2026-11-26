@@ -7,10 +7,10 @@ Website học tiếng Hàn cá nhân bằng tiếng Việt. Bắt đầu với H
 Từ thư mục repository, chạy:
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8765
 ```
 
-Mở `http://localhost:8000`. Trình duyệt cần HTTP để tải các mô-đun JavaScript. Website dùng HTML, CSS và JavaScript thuần, không cần cài gói hay chạy lệnh build.
+Mở `http://localhost:8765`. Trình duyệt cần HTTP để tải các mô-đun JavaScript. Website dùng HTML, CSS và JavaScript thuần, không cần cài gói hay chạy lệnh build.
 
 ## Triển khai bằng GitHub Pages
 
